@@ -7,5 +7,5 @@ edition = "2018"
 [dependencies]
 bevy = "0.5"
 
-#[patch.crates-io]
-#bevy = { path = "../bevy" }
+[patch.crates-io]
+bevy = { path = "../bevy" }
