@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum GlobalMesh {
     Tile,
     King,

@@ -1,7 +1,13 @@
-use bevy::prelude::*;
+use prelude::*;
 use global_assets::{GlobalAssets, GlobalAssetsPlugin};
+use pieces::create_pieces;
 
-mod global_assets;
+pub mod prelude;
+pub mod board_layout;
+pub mod chess;
+pub mod global_assets;
+pub mod pieces;
+pub mod mesh_group;
 
 fn main() {
     App::build()
@@ -16,6 +22,7 @@ fn main() {
         .add_plugin(GlobalAssetsPlugin)
         .add_startup_system(setup.system())
         .add_startup_system(create_board.system())
+        .add_startup_system(create_pieces.system())
         .run();
 }
 
@@ -56,13 +63,15 @@ fn create_board (
         global_assets: Res<GlobalAssets>,
 ) {
 
-    for i in 0..8 {
-        for j in 0..8 {
-            let transform = Transform::from_translation(Vec3::new(i as f32, 0., j as f32));
+    use board_layout::*;
+
+    for i in 1..=8 {
+        for j in 1..=8 {
+            let transform = Transform::from_translation(file_rank(i, j));
             let mesh = global_assets.mesh_tile.clone();
             let material: Handle<StandardMaterial>;
 
-            if (i + j + 1) % 2 == 0 {
+            if (i + j) % 2 == 0 {
                 material = global_assets.mat_white_tile.clone();
             } else {
                 material = global_assets.mat_black_tile.clone();
