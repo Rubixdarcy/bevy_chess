@@ -1,4 +1,7 @@
-use crate::{mesh_group::MeshGroupCommands, prelude::*};
+use crate::{
+    mesh_group::MeshGroupCommands,
+    prelude::*,
+};
 
 pub fn create_pieces(mut cmd: Commands, global_assets: Res<GlobalAssets>) {
     use board_layout::*;

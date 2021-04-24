@@ -1,4 +1,7 @@
-use global_assets::{GlobalAssets, GlobalAssetsPlugin};
+use global_assets::{
+    GlobalAssets,
+    GlobalAssetsPlugin,
+};
 use pieces::create_pieces;
 use prelude::*;
 
