@@ -1,6 +1,6 @@
-pub use bevy::prelude::*;
 pub use crate::{
+    board_layout,
     chess::{Piece, PieceColor},
     global_assets::{GlobalAssets, GlobalMaterial, GlobalMesh},
-    board_layout,
 };
+pub use bevy::prelude::*;

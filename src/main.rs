@@ -1,17 +1,17 @@
-use prelude::*;
 use global_assets::{GlobalAssets, GlobalAssetsPlugin};
 use pieces::create_pieces;
+use prelude::*;
 
-pub mod prelude;
 pub mod board_layout;
 pub mod chess;
 pub mod global_assets;
-pub mod pieces;
 pub mod mesh_group;
+pub mod pieces;
+pub mod prelude;
 
 fn main() {
     App::build()
-        .insert_resource(Msaa { samples: 4})
+        .insert_resource(Msaa { samples: 4 })
         .insert_resource(WindowDescriptor {
             title: "Chess!".to_string(),
             width: 1600.,
@@ -26,43 +26,33 @@ fn main() {
         .run();
 }
 
-fn setup (
-    mut cmd: Commands,
-) {
-    
-    let cam_pos   = Vec3::new(-7., 20., 4.);
+fn setup(mut cmd: Commands) {
+    let cam_pos = Vec3::new(-7., 20., 4.);
     let light_pos = Vec3::new(4., 8., 4.);
 
     let cam_rot = Quat::from_xyzw(-0.3, -0.5, -0.3, 0.5).normalize();
-    
+
     // Camera
-    cmd
-        .spawn_bundle(PerspectiveCameraBundle {
-            transform: 
-            Transform {
-                translation: cam_pos,
-                rotation: cam_rot,
-                ..Default::default()
-            },
+    cmd.spawn_bundle(PerspectiveCameraBundle {
+        transform: Transform {
+            translation: cam_pos,
+            rotation: cam_rot,
             ..Default::default()
-        });
-    
+        },
+        ..Default::default()
+    });
+
     // Light
-    cmd
-        .spawn_bundle(LightBundle {
-            transform: Transform {
-                translation: light_pos,
-                ..Default::default()
-            },
+    cmd.spawn_bundle(LightBundle {
+        transform: Transform {
+            translation: light_pos,
             ..Default::default()
-        });
+        },
+        ..Default::default()
+    });
 }
 
-fn create_board (
-    mut cmd: Commands,
-        global_assets: Res<GlobalAssets>,
-) {
-
+fn create_board(mut cmd: Commands, global_assets: Res<GlobalAssets>) {
     use board_layout::*;
 
     for i in 1..=8 {
@@ -77,10 +67,12 @@ fn create_board (
                 material = global_assets.mat_black_tile.clone();
             }
 
-            cmd
-                .spawn_bundle(PbrBundle { transform, mesh, material, ..Default::default() });
-
+            cmd.spawn_bundle(PbrBundle {
+                transform,
+                mesh,
+                material,
+                ..Default::default()
+            });
         }
     }
-
 }

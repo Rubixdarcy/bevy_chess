@@ -24,20 +24,20 @@ pub enum GlobalMaterial {
 use GlobalMaterial::*;
 
 pub struct GlobalAssets {
-    pub mesh_tile: Handle<Mesh>, 
+    pub mesh_tile: Handle<Mesh>,
 
-    pub mesh_king: Handle<Mesh>,
+    pub mesh_king:       Handle<Mesh>,
     pub mesh_king_cross: Handle<Mesh>,
-    pub mesh_pawn: Handle<Mesh>,
-    pub mesh_knight_1: Handle<Mesh>,
-    pub mesh_knight_2: Handle<Mesh>,
-    pub mesh_rook: Handle<Mesh>,
-    pub mesh_bishop: Handle<Mesh>,
-    pub mesh_queen: Handle<Mesh>,
+    pub mesh_pawn:       Handle<Mesh>,
+    pub mesh_knight_1:   Handle<Mesh>,
+    pub mesh_knight_2:   Handle<Mesh>,
+    pub mesh_rook:       Handle<Mesh>,
+    pub mesh_bishop:     Handle<Mesh>,
+    pub mesh_queen:      Handle<Mesh>,
 
     pub mat_black_tile: Handle<StandardMaterial>,
     pub mat_white_tile: Handle<StandardMaterial>,
-    
+
     pub mat_black_piece: Handle<StandardMaterial>,
     pub mat_white_piece: Handle<StandardMaterial>,
 }
@@ -45,22 +45,22 @@ pub struct GlobalAssets {
 impl GlobalAssets {
     pub fn clone_mesh(&self, mesh: GlobalMesh) -> Handle<Mesh> {
         match mesh {
-            Tile      => self.mesh_tile.clone(),
-            King      => self.mesh_king.clone(),
+            Tile => self.mesh_tile.clone(),
+            King => self.mesh_king.clone(),
             KingCross => self.mesh_king_cross.clone(),
-            Pawn      => self.mesh_pawn.clone(),
-            Knight1   => self.mesh_knight_1.clone(),
-            Knight2   => self.mesh_knight_2.clone(),
-            Rook      => self.mesh_rook.clone(),
-            Bishop    => self.mesh_bishop.clone(),
-            Queen     => self.mesh_queen.clone(),
+            Pawn => self.mesh_pawn.clone(),
+            Knight1 => self.mesh_knight_1.clone(),
+            Knight2 => self.mesh_knight_2.clone(),
+            Rook => self.mesh_rook.clone(),
+            Bishop => self.mesh_bishop.clone(),
+            Queen => self.mesh_queen.clone(),
         }
     }
 
     pub fn clone_material(&self, material: GlobalMaterial) -> Handle<StandardMaterial> {
         match material {
-            BlackTile  => self.mat_black_tile.clone(),
-            WhiteTile  => self.mat_white_tile.clone(),
+            BlackTile => self.mat_black_tile.clone(),
+            WhiteTile => self.mat_white_tile.clone(),
             BlackPiece => self.mat_black_piece.clone(),
             WhitePiece => self.mat_white_piece.clone(),
         }
@@ -71,10 +71,10 @@ pub struct GlobalAssetsPlugin;
 
 impl GlobalAssetsPlugin {
     fn setup(
-        mut cmd:          Commands,
-        mut meshes:       ResMut<Assets<Mesh>>,
-        mut materials:    ResMut<Assets<StandardMaterial>>,
-            asset_server: Res<AssetServer>,
+        mut cmd: Commands,
+        mut meshes: ResMut<Assets<Mesh>>,
+        mut materials: ResMut<Assets<StandardMaterial>>,
+        asset_server: Res<AssetServer>,
     ) {
         cmd.insert_resource(GlobalAssets {
             mesh_tile: meshes.add(Mesh::from(shape::Plane { size: 1.0 })),
@@ -91,8 +91,8 @@ impl GlobalAssetsPlugin {
             mat_black_tile: materials.add(Color::rgb(1., 0.9, 0.9).into()),
             mat_white_tile: materials.add(Color::rgb(0., 0.1, 0.1).into()),
 
-            mat_black_piece:  materials.add(Color::rgb(0., 0.2, 0.2).into()),
-            mat_white_piece:  materials.add(Color::rgb(1., 0.8, 0.8).into()),
+            mat_black_piece: materials.add(Color::rgb(0., 0.2, 0.2).into()),
+            mat_white_piece: materials.add(Color::rgb(1., 0.8, 0.8).into()),
         })
     }
 }
